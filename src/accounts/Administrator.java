@@ -1,9 +1,16 @@
 package accounts;
 
+import inventory.Book;
+import inventory.Bookstore;
+
+import java.util.List;
+
 public class Administrator extends User{
     private String username;
     private String role;
     private String password;
+    private List<Bookstore> bookstores; // need to fix this.
+
     public Administrator(String firstname, String lastname, String address, int phone, String username, String role, String password) {
         super(firstname, lastname, address, phone);
         this.username = username;
@@ -33,5 +40,21 @@ public class Administrator extends User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addBook(Book book, int BookstoreId){
+        for(Bookstore store:bookstores){
+            if(store.getId()==BookstoreId){
+                store.addBook(book);
+            }
+        }// what if there is no id
+    }
+
+    public void removeBook(Book book, int BookstoreId){
+        for(Bookstore store:bookstores){
+            if(store.getId()==BookstoreId){
+                store.removeBook(book);
+            }
+        }// what if there is no id
     }
 }
